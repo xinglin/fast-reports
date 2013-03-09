@@ -1,0 +1,16 @@
+# this profile tries to test the sequential write performance
+# usage: IODEPTH=[1..32] fio SW.fio
+[global]
+bs=4m
+thread=0 # log.c:25: log_io_u: Assertion `io_u->ddir < 3' failed.ops] [eta 01m:00s]
+time_based=0
+runtime=200
+invalidate=1
+
+rw=write
+direct=1
+iodepth=${IODEPTH}
+ioengine=libaio
+
+[seqwrite-0]
+filename=/dev/rbd0

@@ -1,0 +1,16 @@
+# this profile tries to test the read performance
+# usage: sudo IODEPTH=[1..32] fio SR.fio
+[global]
+rw=read
+bs=4m
+thread=0
+time_based=1
+runtime=200
+invalidate=1
+
+direct=1
+iodepth=${IODEPTH}
+ioengine=libaio
+
+[seqread-0]
+filename=/dev/rbd0

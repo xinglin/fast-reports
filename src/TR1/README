@@ -1,0 +1,11 @@
+ceph.conf
+	configuration file for the ceph cluster
+
+ceph.ns
+	ns file for Emulab to instantiate a ceph cluster
+
+SR.fio
+	the SR job file for fio
+
+SW.fio
+	the SW job file for fio

@@ -1,0 +1,28 @@
+source tb_compat.tcl
+set ns [new Simulator]
+
+set server_num 4
+set i 0
+set serverlanstr ""
+
+# create server nodes
+while { $i < $server_num } {
+	set server($i) [$ns node]
+	tb-set-node-os $server($i) UBUNTU12-64-CEPH
+	tb-set-hardware $server($i) d820
+	append serverlanstr "$server($i) "
+	incr i
+}
+
+# create server link
+set serverlan [$ns make-lan "$serverlanstr" 10Gb 0ms]
+
+# create a client node
+set client [$ns node]
+tb-set-hardware $client d820
+tb-set-node-os $client UBUNTU12-64-CEPH
+
+set lan0 [$ns make-lan "$serverlanstr client" 10Gb 0ms]
+
+$ns rtproto Static
+$ns run
