@@ -1,0 +1,23 @@
+# this profile tries to test the sequentail write performance
+# usage: sudo BS=[4K..] IODEPTH=[1..32] fio SW.fio
+[global]
+rw=write
+bs=${BS}
+thread=0
+size=10g
+time_based=1
+runtime=60
+invalidate=1
+
+direct=1
+iodepth=${IODEPTH}
+ioengine=libaio
+
+#direct=1
+#sync=1
+#ioengine=sync
+
+
+[seqread-0]
+filesize=10G
+filename=/mnt/test
